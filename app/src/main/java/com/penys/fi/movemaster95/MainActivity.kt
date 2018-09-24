@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
                 message.setText(R.string.title_dashboard)
                 val mapFragment = MapFragment()
                 val transaction = manager.beginTransaction()
-
+              
                 transaction.replace(R.id.fragment_container,mapFragment)
 
                 transaction.addToBackStack(null)
