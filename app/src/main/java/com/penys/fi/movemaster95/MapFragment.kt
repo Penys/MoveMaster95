@@ -62,13 +62,13 @@ class MapFragment : Fragment(), LocationListener {
                         PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(activity as Activity,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0)
+        } else {
+            lm.requestLocationUpdates(
+                    LocationManager.NETWORK_PROVIDER,
+                    60 * 1000,
+                    50f,
+                    this)
         }
-
-        lm.requestLocationUpdates(
-                LocationManager.NETWORK_PROVIDER,
-                60 * 1000,
-                50f,
-                this)
 
 
         return view
