@@ -12,39 +12,33 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                message.setText(R.string.title_home)
+                message.text = "Home"
                 val homeFragment = HomeFragment()
                 val transaction = manager.beginTransaction()
 
                 transaction.replace(R.id.fragment_container,homeFragment)
-
                 transaction.addToBackStack(null)
-
                 transaction.commit()
 
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_dashboard -> {
-                message.setText(R.string.title_dashboard)
+            R.id.navigation_map -> {
+                message.text = "Map"
                 val mapFragment = MapFragment()
                 val transaction = manager.beginTransaction()
-              
+
                 transaction.replace(R.id.fragment_container,mapFragment)
-
                 transaction.addToBackStack(null)
-
                 transaction.commit()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
-                message.setText(R.string.title_notifications)
+            R.id.navigation_profile -> {
+                message.text = "Profile"
                 val statsFragment = StatsFragment()
                 val transaction = manager.beginTransaction()
 
                 transaction.replace(R.id.fragment_container,statsFragment)
-
                 transaction.addToBackStack(null)
-
                 transaction.commit()
 
                 return@OnNavigationItemSelectedListener true
