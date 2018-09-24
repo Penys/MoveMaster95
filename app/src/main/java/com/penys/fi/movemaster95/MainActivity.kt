@@ -26,7 +26,11 @@ class MainActivity : AppCompatActivity() {
                 message.text = "Map"
                 val mapFragment = MapFragment()
                 val transaction = manager.beginTransaction()
+<<<<<<< HEAD
 
+=======
+              
+>>>>>>> 8f33bae62dc294f83143925b721a46e78fe8e030
                 transaction.replace(R.id.fragment_container,mapFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
