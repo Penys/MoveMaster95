@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
                 val homeFragment = HomeFragment()
                 val transaction = manager.beginTransaction()
 
-
                 transaction.replace(R.id.fragment_container,homeFragment)
 
                 transaction.addToBackStack(null)
@@ -29,8 +28,7 @@ class MainActivity : AppCompatActivity() {
                 message.setText(R.string.title_dashboard)
                 val mapFragment = MapFragment()
                 val transaction = manager.beginTransaction()
-
-
+              
                 transaction.replace(R.id.fragment_container,mapFragment)
 
                 transaction.addToBackStack(null)
@@ -42,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                 message.setText(R.string.title_notifications)
                 val statsFragment = StatsFragment()
                 val transaction = manager.beginTransaction()
-
 
                 transaction.replace(R.id.fragment_container,statsFragment)
 
