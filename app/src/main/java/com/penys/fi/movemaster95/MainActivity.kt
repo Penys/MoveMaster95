@@ -8,13 +8,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
     val manager = supportFragmentManager
-    val transaction = manager.beginTransaction()
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
                 message.setText(R.string.title_home)
                 val homeFragment = HomeFragment()
+                val transaction = manager.beginTransaction()
+
 
                 transaction.replace(R.id.fragment_container,homeFragment)
 
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_dashboard -> {
                 message.setText(R.string.title_dashboard)
                 val mapFragment = MapFragment()
+                val transaction = manager.beginTransaction()
+
 
                 transaction.replace(R.id.fragment_container,mapFragment)
 
@@ -38,6 +41,8 @@ class MainActivity : AppCompatActivity() {
             R.id.navigation_notifications -> {
                 message.setText(R.string.title_notifications)
                 val statsFragment = StatsFragment()
+                val transaction = manager.beginTransaction()
+
 
                 transaction.replace(R.id.fragment_container,statsFragment)
 
