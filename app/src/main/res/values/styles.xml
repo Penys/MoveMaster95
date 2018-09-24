@@ -9,7 +9,10 @@
     </style>
 
     <style name="Penys_theme" parent="AppTheme" >
-        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/accent</item>
+        <item name="android:colorForeground">@android:color/black</item>
     </style>
 
 </resources>
