@@ -3,4 +3,6 @@
     <string name="title_home">Home</string>
     <string name="title_map">Map</string>
     <string name="title_profile">Profile</string>
+    <string name="steps_counted">Steps counted:</string>
+    <string name="step_count_placeholder">0</string>
 </resources>
