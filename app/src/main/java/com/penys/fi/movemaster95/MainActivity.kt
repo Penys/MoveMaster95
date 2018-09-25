@@ -51,5 +51,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
+        val homeFragment = HomeFragment()
+        val transaction = manager.beginTransaction()
+
+        transaction.replace(R.id.fragment_container,homeFragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
 }

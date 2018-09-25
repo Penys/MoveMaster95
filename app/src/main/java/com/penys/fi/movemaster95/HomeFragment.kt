@@ -8,27 +8,21 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.Toast
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import kotlinx.android.synthetic.main.home_layout.*
 
 class HomeFragment : Fragment(), SensorEventListener {
-
-    var running = false
+    var running = true
     var sensorManager: SensorManager? = null
-    val sv = view?.findViewById<TextView>(R.id.step_view)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater!!.inflate(R.layout.home_layout, container, false)
-        val settingsButton = view?.findViewById<ImageView>(R.id.settings_button)
+        val view = inflater.inflate(R.layout.home_layout, container, false)
         sensorManager = activity!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         return view
     }
@@ -36,7 +30,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onResume() {
         super.onResume()
         running = true
-        var stepsSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        val stepsSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
         if(stepsSensor == null){
             Toast.makeText(activity!!.applicationContext, "No Step Counter Sensor detected!!", Toast.LENGTH_SHORT).show()
@@ -56,8 +50,9 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     @SuppressLint("SetTextI18n")
     override fun onSensorChanged(event: SensorEvent?) {
+        Log.d("dbg", event?.values!![0].toString())
         if(running) {
-            sv?.text = "" + event!!.values[0]
+            step_count.text = event?.values[0].toString()
         }
     }
 }
