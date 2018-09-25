@@ -24,15 +24,13 @@ import org.osmdroid.views.MapView
 class MapFragment : Fragment(), LocationListener {
 
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
 
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = inflater!!.inflate(R.layout.map_layout, container, false)
+
+        val view = inflater?.inflate(R.layout.map_layout, container, false)
         val map = view!!.findViewById<MapView>(R.id.map)
 
 
@@ -40,12 +38,11 @@ class MapFragment : Fragment(), LocationListener {
 
         Configuration.getInstance().load(ctx,
                 PreferenceManager.getDefaultSharedPreferences(ctx))
-        //setContentView(R.layout.activity_main)
-
         val myLocation = MyLocationNewOverlay(map)
         myLocation.enableMyLocation()
         myLocation.enableFollowLocation()
         map?.overlays?.add(myLocation)
+
 
         map?.setTileSource(TileSourceFactory.MAPNIK)
         map?.setBuiltInZoomControls(true)
@@ -57,11 +54,12 @@ class MapFragment : Fragment(), LocationListener {
         val lm = activity!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
 
-        if((Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(activity!!.applicationContext,
+        if ((Build.VERSION.SDK_INT >= 23 && ContextCompat.checkSelfPermission(activity!!.applicationContext,
                         android.Manifest.permission.ACCESS_FINE_LOCATION) !=
                         PackageManager.PERMISSION_GRANTED)) {
             ActivityCompat.requestPermissions(activity as Activity,
                     arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0)
+
         } else {
             lm.requestLocationUpdates(
                     LocationManager.NETWORK_PROVIDER,
@@ -74,6 +72,7 @@ class MapFragment : Fragment(), LocationListener {
         return view
 
     }
+
     override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {
     }
 
