@@ -2,8 +2,6 @@ package com.penys.fi.movemaster95
 
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
@@ -51,7 +49,6 @@ class MainActivity : AppCompatActivity() {
 
                 return@OnNavigationItemSelectedListener true
 
-
             }
         }
         false
@@ -65,12 +62,12 @@ class MainActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this as Activity,
-                    arrayOf(android.Manifest.permission.WRITE_EXTERNAL_STORAGE), 0)
+                    arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
 
             // Permission is not granted
         }else {
         }
-        add
+
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 }
