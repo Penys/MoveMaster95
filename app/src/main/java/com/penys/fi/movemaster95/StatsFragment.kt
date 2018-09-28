@@ -1,13 +1,12 @@
 package com.penys.fi.movemaster95
 
-import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 
+@Suppress("DEPRECATION")
 class StatsFragment : Fragment() {
 
 
@@ -19,7 +18,6 @@ class StatsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.stats_layout, container, false)
-        //val settingsButton = view?.findViewById<ImageView>(R.id.settings_button)
 
         return view
 

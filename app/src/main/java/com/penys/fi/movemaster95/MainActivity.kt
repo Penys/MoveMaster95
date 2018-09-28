@@ -5,13 +5,15 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
+import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
-    val manager = supportFragmentManager
+    val manager = fragmentManager
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -19,7 +21,7 @@ class MainActivity : AppCompatActivity() {
                 val homeFragment = HomeFragment()
                 val transaction = manager.beginTransaction()
 
-                transaction.replace(R.id.fragment_container,homeFragment)
+                transaction.replace(R.id.fragment_container, homeFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
 
@@ -29,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 val mapFragment = MapFragment()
                 val transaction = manager.beginTransaction()
 
-                transaction.replace(R.id.fragment_container,mapFragment)
+                transaction.replace(R.id.fragment_container, mapFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
 
@@ -39,12 +41,22 @@ class MainActivity : AppCompatActivity() {
                 val statsFragment = StatsFragment()
                 val transaction = manager.beginTransaction()
 
-                transaction.replace(R.id.fragment_container,statsFragment)
+                transaction.replace(R.id.fragment_container, statsFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
 
                 return@OnNavigationItemSelectedListener true
 
+            }
+            R.id.navigation_settings -> {
+                val settingsFragment = SettingsFragment()
+                val transaction = manager.beginTransaction()
+
+                transaction.replace(R.id.fragment_container, settingsFragment)
+                transaction.addToBackStack(null)
+                transaction.commit()
+
+                return@OnNavigationItemSelectedListener true
             }
         }
         false
@@ -61,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
 
             // Permission is not granted
-        }else {
+        } else {
         }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -69,7 +81,7 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
         val transaction = manager.beginTransaction()
 
-        transaction.replace(R.id.fragment_container,homeFragment)
+        transaction.replace(R.id.fragment_container, homeFragment)
         transaction.addToBackStack(null)
         transaction.commit()
     }

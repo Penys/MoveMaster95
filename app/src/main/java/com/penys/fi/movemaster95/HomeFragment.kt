@@ -7,16 +7,15 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.Toast
 import kotlinx.android.synthetic.main.home_layout.*
 
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment(), SensorEventListener {
     var running = true
     var sensorManager: SensorManager? = null
@@ -32,7 +31,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         running = true
         val stepsSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
-        if(stepsSensor == null){
+        if (stepsSensor == null) {
             Toast.makeText(activity!!.applicationContext, "No Step Counter Sensor detected!!", Toast.LENGTH_SHORT).show()
         } else {
             sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_GAME)
@@ -51,7 +50,7 @@ class HomeFragment : Fragment(), SensorEventListener {
     @SuppressLint("SetTextI18n")
     override fun onSensorChanged(event: SensorEvent?) {
         Log.d("dbg", event?.values!![0].toString())
-        if(running) {
+        if (running) {
             step_count.text = event?.values[0].toString()
         }
     }

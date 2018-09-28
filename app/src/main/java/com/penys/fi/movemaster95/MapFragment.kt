@@ -10,17 +10,18 @@ import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.support.v4.app.ActivityCompat
-import android.support.v4.app.Fragment
+import android.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
-import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
 
+@Suppress("DEPRECATION")
 class MapFragment : Fragment(), LocationListener {
 
 
