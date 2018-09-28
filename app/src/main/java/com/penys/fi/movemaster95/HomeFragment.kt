@@ -35,7 +35,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         if(stepsSensor == null){
             Toast.makeText(activity!!.applicationContext, "No Step Counter Sensor detected!!", Toast.LENGTH_SHORT).show()
         } else {
-            sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_UI)
+            sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_GAME)
         }
     }
 

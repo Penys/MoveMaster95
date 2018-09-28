@@ -26,15 +26,13 @@ class MainActivity : AppCompatActivity() {
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_map -> {
-
-                message.text = "Map"
-
                 val mapFragment = MapFragment()
                 val transaction = manager.beginTransaction()
 
                 transaction.replace(R.id.fragment_container,mapFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
+
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_profile -> {
