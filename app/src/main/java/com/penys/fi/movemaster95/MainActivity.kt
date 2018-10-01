@@ -9,7 +9,9 @@ import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,13 +21,10 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                val homeFragment = HomeFragment()
-                val transaction = manager.beginTransaction()
-
-                transaction.replace(R.id.fragment_container, homeFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-
+                manager.beginTransaction()
+                        .replace(R.id.fragment_container, HomeFragment())
+                        .addToBackStack(null)
+                        .commit()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_map -> {
@@ -47,16 +46,19 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this as Activity,
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
         } else {
+            Log.d("dbg", "Permission Ok")
         }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-
+        manager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment())
+                .addToBackStack(null)
+                .commit()
     }
 
     fun mapsActivity() {
         val intent = Intent(this, MapsActivity::class.java).apply {
         }
         startActivity(intent)
-
     }
 }
