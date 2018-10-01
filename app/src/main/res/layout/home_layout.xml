@@ -73,4 +73,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progressBarSecondary" />
 
+    <Button
+        android:id="@+id/ar_core_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MegaBlaster3k"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="484dp" />
+
 </android.support.constraint.ConstraintLayout>
