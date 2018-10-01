@@ -15,6 +15,7 @@ import android.support.v4.content.ContextCompat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.views.MapView
@@ -24,12 +25,10 @@ import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 @Suppress("DEPRECATION")
 class MapFragment : Fragment(), LocationListener {
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
 
         val view = inflater?.inflate(R.layout.map_layout, container, false)
         val map = view!!.findViewById<MapView>(R.id.map)
-
 
         val ctx = activity
 
