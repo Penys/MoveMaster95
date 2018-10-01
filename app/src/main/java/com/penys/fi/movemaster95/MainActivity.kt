@@ -1,12 +1,15 @@
 package com.penys.fi.movemaster95
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 @Suppress("DEPRECATION")
@@ -17,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
+
             R.id.navigation_home -> {
                 manager.beginTransaction()
                         .replace(R.id.fragment_container, HomeFragment())
@@ -25,14 +29,11 @@ class MainActivity : AppCompatActivity() {
 
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_map -> {
-                manager.beginTransaction()
-                        .replace(R.id.fragment_container, MapFragment())
-                        .addToBackStack(null)
-                        .commit()
 
-                return@OnNavigationItemSelectedListener true
+            R.id.navigation_map -> {
+                mapsActivity()
             }
+
             R.id.navigation_profile -> {
                 manager.beginTransaction()
                         .replace(R.id.fragment_container, ProfileFragment())
@@ -40,8 +41,8 @@ class MainActivity : AppCompatActivity() {
                         .commit()
 
                 return@OnNavigationItemSelectedListener true
-
             }
+
             R.id.navigation_settings -> {
                 manager.beginTransaction()
                         .replace(R.id.fragment_container, SettingsFragment())
@@ -50,9 +51,11 @@ class MainActivity : AppCompatActivity() {
 
                 return@OnNavigationItemSelectedListener true
             }
+
         }
-        false
     }
+    false
+}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,8 +66,6 @@ class MainActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this as Activity,
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
-
-            // Permission is not granted
         } else {
         }
 
@@ -75,4 +76,10 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(BACK_STACK)
                 .commit()
     }
+
+fun mapsActivity() {
+        val intent = Intent(this, MapsActivity::class.java).apply {
+        }
+        startActivity(intent)
+
 }
