@@ -1,12 +1,15 @@
 package com.penys.fi.movemaster95
 
 import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.provider.AlarmClock.EXTRA_MESSAGE
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                 val homeFragment = HomeFragment()
                 val transaction = manager.beginTransaction()
 
-                transaction.replace(R.id.fragment_container,homeFragment)
+                transaction.replace(R.id.fragment_container, homeFragment)
                 transaction.addToBackStack(null)
                 transaction.commit()
 
@@ -27,27 +30,9 @@ class MainActivity : AppCompatActivity() {
             }
             R.id.navigation_map -> {
 
-                message.text = "Map"
-
-                val mapFragment = MapFragment()
-                val transaction = manager.beginTransaction()
-
-                transaction.replace(R.id.fragment_container,mapFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-                return@OnNavigationItemSelectedListener true
+                mapsActivity()
             }
-            R.id.navigation_profile -> {
-                val statsFragment = StatsFragment()
-                val transaction = manager.beginTransaction()
 
-                transaction.replace(R.id.fragment_container,statsFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
-
-                return@OnNavigationItemSelectedListener true
-
-            }
         }
         false
     }
@@ -61,18 +46,17 @@ class MainActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this as Activity,
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
-
-            // Permission is not granted
-        }else {
+        } else {
         }
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
-        val homeFragment = HomeFragment()
-        val transaction = manager.beginTransaction()
+    }
 
-        transaction.replace(R.id.fragment_container,homeFragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
+    fun mapsActivity() {
+        val intent = Intent(this, MapsActivity::class.java).apply {
+        }
+        startActivity(intent)
+
     }
 }
