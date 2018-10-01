@@ -5,5 +5,19 @@
     <string name="title_profile">Profile</string>
     <string name="steps_counted">Steps counted:</string>
     <string name="step_count_placeholder">0</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="settings">Settings</string>
+    <string name="profile_page_greeting_placeholder">Hello!</string>
+    <string name="pref_user_name">username</string>
+    <string name="pref_user_name_title">Name</string>
+    <string name="pref_user_name_username_sum">Change username</string>
+    <string name="pref_user_name_username_hint">Your name</string>
+    <string name="pref_user_height">height</string>
+    <string name="pref_user_height_title">Height</string>
+    <string name="pref_user_height_sum">Set height</string>
+    <string name="pref_user_height_hint">Set height (cm)</string>
+    <string name="pref_user_weight">weight</string>
+    <string name="pref_user_weight_title">Weight</string>
+    <string name="pref_user_weight_sum">Set weight</string>
+    <string name="pref_user_weight_hint">Set weight (kg)</string>
+
 </resources>

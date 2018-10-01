@@ -12,30 +12,50 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
-    val manager = supportFragmentManager
+    val manager = fragmentManager
+    val BACK_STACK = "root_fragment"
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
-            R.id.navigation_home -> {
-                val homeFragment = HomeFragment()
-                val transaction = manager.beginTransaction()
 
-                transaction.replace(R.id.fragment_container, homeFragment)
-                transaction.addToBackStack(null)
-                transaction.commit()
+            R.id.navigation_home -> {
+                manager.beginTransaction()
+                        .replace(R.id.fragment_container, HomeFragment())
+                        .addToBackStack(BACK_STACK)
+                        .commit()
 
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_map -> {
 
+            R.id.navigation_map -> {
                 mapsActivity()
             }
 
+            R.id.navigation_profile -> {
+                manager.beginTransaction()
+                        .replace(R.id.fragment_container, ProfileFragment())
+                        .addToBackStack(null)
+                        .commit()
+
+                return@OnNavigationItemSelectedListener true
+            }
+
+            R.id.navigation_settings -> {
+                manager.beginTransaction()
+                        .replace(R.id.fragment_container, SettingsFragment())
+                        .addToBackStack(null)
+                        .commit()
+
+                return@OnNavigationItemSelectedListener true
+            }
+
         }
-        false
     }
+    false
+}
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,12 +71,15 @@ class MainActivity : AppCompatActivity() {
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
 
+        manager.beginTransaction()
+                .replace(R.id.fragment_container, HomeFragment())
+                .addToBackStack(BACK_STACK)
+                .commit()
     }
 
-    fun mapsActivity() {
+fun mapsActivity() {
         val intent = Intent(this, MapsActivity::class.java).apply {
         }
         startActivity(intent)
 
-    }
 }

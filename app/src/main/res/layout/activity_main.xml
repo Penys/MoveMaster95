@@ -7,9 +7,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <fragment
+    <FrameLayout
         android:id="@+id/fragment_container"
-        android:name="com.penys.fi.movemaster95.StatsFragment"
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="8dp"

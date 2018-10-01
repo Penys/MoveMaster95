@@ -11,12 +11,12 @@ import android.os.Handler
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import kotlinx.android.synthetic.main.home_layout.*
 
+@Suppress("DEPRECATION")
 class HomeFragment : Fragment(), SensorEventListener {
     var running = true
     var sensorManager: SensorManager? = null
@@ -41,7 +41,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         if (stepsSensor == null) {
             Toast.makeText(activity!!.applicationContext, "No Step Counter Sensor detected!!", Toast.LENGTH_SHORT).show()
         } else {
-            sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_UI)
+            sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_GAME)
         }
        // makeHandler()
         progressBar()
