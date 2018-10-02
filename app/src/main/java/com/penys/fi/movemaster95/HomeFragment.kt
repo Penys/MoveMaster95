@@ -15,6 +15,7 @@ import android.view.LayoutInflater
 import android.widget.Toast
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import kotlinx.android.synthetic.main.home_layout.*
 
 class HomeFragment : Fragment(), SensorEventListener {
