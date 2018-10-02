@@ -1,6 +1,9 @@
+@file:Suppress("DEPRECATION")
+
 package com.penys.fi.movemaster95
 
 import android.annotation.SuppressLint
+import android.app.Fragment
 import android.content.Context
 import android.content.Intent
 import android.hardware.Sensor
@@ -9,13 +12,11 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
-import android.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import android.widget.Toast
 import kotlinx.android.synthetic.main.home_layout.*
 
 class HomeFragment : Fragment(), SensorEventListener {
@@ -29,7 +30,6 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_layout, container, false)
-        val arCoreButton = view.findViewById<Button>(R.id.ar_core_button)
         sensorManager = activity!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         return view
     }
@@ -94,8 +94,8 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
         Log.d("dbg", event?.values!![0].toString())
         if (running) {
-            step_count.text = event?.values[0].toString()
-            secondaryProgressStatus  = event?.values[0].toInt()
+            step_count.text = event.values[0].toString()
+            secondaryProgressStatus  = event.values[0].toInt()
         }
     }
     fun arCoreActivity() {
