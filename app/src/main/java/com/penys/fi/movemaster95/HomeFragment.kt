@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.Fragment
 import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
@@ -22,21 +21,16 @@ import kotlinx.android.synthetic.main.home_layout.*
 class HomeFragment : Fragment(), SensorEventListener {
     private var running = true
     private var sensorManager: SensorManager? = null
-
     private var isStarted = false
     private var handler: Handler? = null
     private var secondaryHandler: Handler? = Handler()
     private var secondaryProgressStatus = 0
-    private var STEP_COUNTER_RESET = "stepCounterReset"
-    private var sharedPref: SharedPreferences? = null
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_layout, container, false)
         sensorManager = activity!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager
         return view
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -59,7 +53,6 @@ class HomeFragment : Fragment(), SensorEventListener {
             }
         }
 
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -76,7 +69,6 @@ class HomeFragment : Fragment(), SensorEventListener {
 
         handler?.sendEmptyMessage(0)
 
-
         Thread(Runnable {
 
             secondaryHandler?.post {
@@ -87,7 +79,6 @@ class HomeFragment : Fragment(), SensorEventListener {
             }
         }).start()
     }
-
 
     override fun onPause() {
         super.onPause()

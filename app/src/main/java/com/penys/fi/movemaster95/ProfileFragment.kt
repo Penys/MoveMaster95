@@ -1,6 +1,5 @@
 package com.penys.fi.movemaster95
 
-
 import android.annotation.SuppressLint
 import android.app.Fragment
 import android.content.SharedPreferences
@@ -16,9 +15,7 @@ import android.widget.TextView
 import com.penys.fi.movemaster95.ble_connection.BleConnectionFragment
 
 
-@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
-
 
     private var prefMan: SharedPreferences? = null
     private var greeting: TextView? = null
@@ -40,24 +37,10 @@ class ProfileFragment : Fragment() {
         //data variables
         getBmi()
 
-       // val bleService = BleConnectionFragment::class.java
-       // val intent = Intent(context, bleService)
-
         heartRateButton.setOnClickListener {
-
-
             bleConnectionFragment()
-            /*if (!isServiceRunning(bleService)) {
-                activity.startService(intent)
 
-
-            } else {
-
-            }*/
         }
-
-
-
 
         return view
     }
@@ -69,16 +52,6 @@ class ProfileFragment : Fragment() {
                 .commit()
     }
 
-    /*@RequiresApi(Build.VERSION_CODES.O)
-    private fun isServiceRunning(bleService: Class<BleConnectionFragment>): Boolean {
-        val fragmentManager = fragmentManager
-        for (fragment in fragmentManager.fragments) {
-            if (bleService.name == fragment.getString(0)) {
-                return true
-            }
-        }
-        return false
-    }*/
 
     @SuppressLint("SetTextI18n")
     private fun getBmi() {
