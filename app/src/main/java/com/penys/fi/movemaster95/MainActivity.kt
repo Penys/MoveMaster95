@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.penys.fi.movemaster95
 
 import android.app.Activity

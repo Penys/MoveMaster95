@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.penys.fi.movemaster95
 
 import android.annotation.SuppressLint
@@ -101,9 +103,8 @@ class HomeFragment : Fragment(), SensorEventListener {
         Log.d("dbg", event?.values!![0].toString())
         if (running) {
 
-
             step_count.text = event.values[0].toString()
-            secondaryProgressStatus = event.values[0].toInt()
+            secondaryProgressStatus  = event.values[0].toInt()
 
         }
     }

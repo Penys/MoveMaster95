@@ -1,5 +1,6 @@
 package com.penys.fi.movemaster95
 
+import android.annotation.SuppressLint
 import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Bundle
@@ -57,9 +58,9 @@ class ARCoreActivity : AppCompatActivity() {
 
     }
 
+    @SuppressLint("SetTextI18n")
     private fun addObject() {
         val frame = fragment.arSceneView.arFrame
-        val pt = getScreenCenter()
         val hits: List<HitResult>
         if (frame != null) {
             hits = frame.hitTest(rndm(), rndm())
@@ -82,7 +83,7 @@ class ARCoreActivity : AppCompatActivity() {
                     mNode.setOnTapListener { _, _ ->
                         duck_sound.start()
                         blast_count++
-                        blast_counter.text = "Ducks blasted: " + blast_count.toString()
+                        blast_counter.text = "Ducks blasted: $blast_count"
                         anchorNode.removeChild(mNode)
                         nro--
                         Log.d("NUMERO", "$nro")
