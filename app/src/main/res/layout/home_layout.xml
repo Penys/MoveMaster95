@@ -23,8 +23,7 @@
         app:layout_constraintBottom_toTopOf="@+id/step_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -72,13 +71,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/progressBarSecondary" />
-
-    <Button
-        android:id="@+id/ar_core_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="MegaBlaster3k"
-        tools:layout_editor_absoluteX="119dp"
-        tools:layout_editor_absoluteY="484dp" />
 
 </android.support.constraint.ConstraintLayout>
