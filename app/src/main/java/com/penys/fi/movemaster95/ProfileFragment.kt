@@ -6,20 +6,26 @@ import android.app.Activity
 import android.app.Fragment
 import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
+import android.support.v4.content.FileProvider
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import java.io.File
+import java.io.IOException
 
 class ProfileFragment : Fragment() {
 
     val REQUEST_IMAGE_CAPTURE = 1
+    private var photopath: String = ""
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,21 +52,49 @@ class ProfileFragment : Fragment() {
 
         //profile picture change
         profile_pic.setOnClickListener {
-            val myIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            if (myIntent.resolveActivity(activity.packageManager) != null) {
-                startActivityForResult(myIntent, REQUEST_IMAGE_CAPTURE)
-            }
+            takePicture()
         }
 
         return view
     }
 
+    private fun takePicture() {
+        val myIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        if (myIntent.resolveActivity(activity.packageManager) != null) {
+
+            var photoFile: File? = null
+            try {
+                photoFile = createImageFile()
+            }catch (e: IOException){}
+            if(photoFile != null){
+                val photoUri = FileProvider.getUriForFile(
+                        activity,
+                        "com.penys.fi.movemaster95",
+                        photoFile
+                )
+                myIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
+                startActivityForResult(myIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    private fun createImageFile(): File? {
+        val fileName = "MyProfilePic"
+        val storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        var image = File.createTempFile(
+                fileName,
+                ".jpg",
+                storageDir
+        )
+        photopath = image!!.absolutePath
+
+        return image
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val profile_pic = view?.findViewById<ImageView>(R.id.profile_pic_view)
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            val extras = data!!.extras
-            val imageBmp = extras!!.get("data") as Bitmap
-            profile_pic?.setImageBitmap(imageBmp)
+            profile_pic?.setImageURI(Uri.parse(photopath))
         }
     }
 }
