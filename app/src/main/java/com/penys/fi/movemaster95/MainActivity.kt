@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val manager = fragmentManager
+    val manager = this!!.fragmentManager
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -61,6 +61,9 @@ class MainActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this as Activity,
                     arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 0)
+            ActivityCompat.requestPermissions(this as Activity,
+                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 0)
+
         } else {
             Log.d("dbg", "Permission Ok")
         }
