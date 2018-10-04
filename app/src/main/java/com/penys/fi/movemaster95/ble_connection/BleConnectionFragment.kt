@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.penys.fi.movemaster95.ble_connection
 
 import android.Manifest
@@ -39,7 +41,6 @@ class BleConnectionFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.bluetooth_layout, container, false)
-        val sininappi = view.findViewById<Button>(R.id.sininappi)
         val bluetoothManager = activity.getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
         mBluetoothAdapter = bluetoothManager.adapter
 
@@ -62,11 +63,8 @@ class BleConnectionFragment : Fragment() {
             val selectedBluetooth = listView.getItemAtPosition(position) as BluetoothDevs
             Log.d("DEBUGGER", "Device: $selectedBluetooth")
 
-            val blueDev: BluetoothDevice? = null
-            // blueDev = selectedBluetooth.device
-
             val gattClientCallback = GattClientCallback()
-            mBluetoothGatt = selectedBluetooth.device?.connectGatt(context, false, gattClientCallback)
+            mBluetoothGatt = selectedBluetooth.device.connectGatt(context, false, gattClientCallback)
 
         }
     }
@@ -140,13 +138,13 @@ class BleConnectionFragment : Fragment() {
 
             val device = result.device
             val deviceAddress = device.address
-            var deviceName = device.name
+            val deviceName = device.name
             val deviceDesibels = result.rssi
 
-            if (deviceName == null) {
-                deviceName = "null"
-            } else {
+            if (deviceName != null) {
                 DeviceList.devicesList.add(BluetoothDevs(device, deviceName, deviceAddress, deviceDesibels))
+            } else {
+                return
             }
 
             mScanResults!![deviceAddress] = result
