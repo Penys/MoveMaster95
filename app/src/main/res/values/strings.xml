@@ -23,4 +23,5 @@
     <string name="photo_pref">photopath</string>
     <string name="photo_pref_title">Profile Picture Path</string>
     <string name="photo_pref_sum">Profile picture path</string>
+    <string name="saved_first_steps" />
 </resources>

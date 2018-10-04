@@ -19,14 +19,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.home_layout.*
 
-class HomeFragment : Fragment(), SensorEventListener {
-    var running = true
-    var sensorManager: SensorManager? = null
 
-    var isStarted = false
-    var handler: Handler? = null
-    var secondaryHandler: Handler? = Handler()
-    var secondaryProgressStatus = 0
+class HomeFragment : Fragment(), SensorEventListener {
+    private var running = true
+    private var sensorManager: SensorManager? = null
+    private var isStarted = false
+    private var handler: Handler? = null
+    private var secondaryHandler: Handler? = Handler()
+    private var secondaryProgressStatus = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_layout, container, false)
@@ -44,14 +44,20 @@ class HomeFragment : Fragment(), SensorEventListener {
         } else {
             sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_UI)
         }
-        progressBar()
-        ar_core_button.setOnClickListener{
-            arCoreActivity()
 
+        progressBar()
+
+        progressBarSecondary.setOnClickListener {
+            if (secondaryProgressStatus >= 10000) {
+                arCoreActivity()
+            } else {
+                Toast.makeText(context, "You don't have enough steps for playing this game!!", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }
 
+    @SuppressLint("SetTextI18n")
     fun progressBar() {
 
         handler = Handler(Handler.Callback {
@@ -65,21 +71,16 @@ class HomeFragment : Fragment(), SensorEventListener {
 
         handler?.sendEmptyMessage(0)
 
-
         Thread(Runnable {
 
             secondaryHandler?.post {
-                val secProgStat = secondaryProgressStatus /100
+                val secProgStat = secondaryProgressStatus / 100
                 progressBarSecondary.setSecondaryProgress(secProgStat)
-                progress_text.setText("Daily Goal progress:\n$secondaryProgressStatus of 10 000")
+                progress_text.text = "Daily Goal progress:\n $secondaryProgressStatus of 10 000"
 
-                if (secondaryProgressStatus == 10000) {
-                    // textViewSecondary.setText("Single task complete.")
-                }
             }
         }).start()
     }
-
 
     override fun onPause() {
         super.onPause()
@@ -90,15 +91,25 @@ class HomeFragment : Fragment(), SensorEventListener {
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "CommitPrefEdits")
     override fun onSensorChanged(event: SensorEvent?) {
+
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        with(sharedPref.edit()) {
+            putInt(getString(R.string.saved_first_steps), event!!.values[0].toInt())
+            commit()
+        }
+
         Log.d("dbg", event?.values!![0].toString())
         if (running) {
+
             step_count.text = event.values[0].toString()
             secondaryProgressStatus  = event.values[0].toInt()
+
         }
     }
-    fun arCoreActivity() {
+
+    private fun arCoreActivity() {
         val intent = Intent(activity, ARCoreActivity::class.java).apply {
         }
         startActivity(intent)
