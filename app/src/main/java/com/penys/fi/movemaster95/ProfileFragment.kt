@@ -4,6 +4,7 @@ package com.penys.fi.movemaster95
 
 import android.app.Activity
 import android.app.Fragment
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -14,6 +15,7 @@ import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.content.FileProvider
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,12 +45,14 @@ class ProfileFragment : Fragment() {
         val weight = prefMan.getString(getString(R.string.pref_user_weight), "")
         val height = prefMan.getString(getString(R.string.pref_user_height), "")
         val bmi: Float = (weight.toFloat()/((height.toFloat()/100)*(height.toFloat()/100)))
+        photopath = prefMan.getString(getString(R.string.photo_pref),"")
 
         //assign data to views
         greeting.text = "Hello " + prefMan.getString(getString(R.string.pref_user_name), "there") + "!"
         weight_view.text = "Weight: " + weight
         height_view.text = "Height: " + height
         bmi_view.text = "BMI: " + (bmi.toInt()).toString()
+        profile_pic.setImageURI(Uri.parse(photopath))
 
         //profile picture change
         profile_pic.setOnClickListener {
@@ -74,6 +78,11 @@ class ProfileFragment : Fragment() {
                 )
                 myIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
                 startActivityForResult(myIntent, REQUEST_IMAGE_CAPTURE)
+                val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
+                with(prefMan.edit()){
+                    putString(getString(R.string.photo_pref), photoFile.toString())
+                    apply()
+                }
             }
         }
     }
@@ -81,7 +90,7 @@ class ProfileFragment : Fragment() {
     private fun createImageFile(): File? {
         val fileName = "MyProfilePic"
         val storageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        var image = File.createTempFile(
+        val image = File.createTempFile(
                 fileName,
                 ".jpg",
                 storageDir
