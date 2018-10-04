@@ -30,50 +30,38 @@ import com.penys.fi.movemaster95.ble_connection.BleConnectionFragment
 
 class ProfileFragment : Fragment() {
 
-    private var prefMan: SharedPreferences? = null
-    private var greeting: TextView? = null
-    private var weight_view: TextView? = null
-    private var height_view: TextView? = null
-    private var bmi_view: TextView? = null
-
+    lateinit var prefMan: SharedPreferences
+    lateinit var greeting: TextView
+    lateinit var weight_view: TextView
+    lateinit var height_view: TextView
+    lateinit var bmi_view: TextView
+    lateinit var profile_pic: ImageView
     val REQUEST_IMAGE_CAPTURE = 1
-    private var photopath: String = ""
+    private var photopath: String? = ""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.profile_layout, container, false)
-        prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
         val heartRateButton = view.findViewById<Button>(R.id.heart_rate_button)
+
         //views init
-        greeting = view.findViewById<TextView>(R.id.greeting_text)
-        weight_view = view.findViewById<TextView>(R.id.weight_view)
-        height_view = view.findViewById<TextView>(R.id.height_view)
-        bmi_view = view.findViewById<TextView>(R.id.bmi_view)
-        val profile_pic = view.findViewById<ImageView>(R.id.profile_pic_view)
+        greeting = view.findViewById(R.id.greeting_text)
+        weight_view = view.findViewById(R.id.weight_view)
+        height_view = view.findViewById(R.id.height_view)
+        bmi_view = view.findViewById(R.id.bmi_view)
+        profile_pic = view.findViewById(R.id.profile_pic_view)
 
-        //data variables
-        val weight = prefMan.getString(getString(R.string.pref_user_weight), "")
-        val height = prefMan.getString(getString(R.string.pref_user_height), "")
-        val bmi: Float = (weight.toFloat()/((height.toFloat()/100)*(height.toFloat()/100)))
+        //prefs init
+        prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
         photopath = prefMan.getString(getString(R.string.photo_pref),"")
-
-        //assign data to views
-        greeting.text = "Hello " + prefMan.getString(getString(R.string.pref_user_name), "there") + "!"
-        weight_view.text = "Weight: " + weight
-        height_view.text = "Height: " + height
-        bmi_view.text = "BMI: " + (bmi.toInt()).toString()
         profile_pic.setImageURI(Uri.parse(photopath))
+
+        //calculate bmi
         getBmi()
-
-        heartRateButton.setOnClickListener {
-            bleConnectionFragment()
-
-        }
-
+        //bluetooth connection button
+        heartRateButton.setOnClickListener { bleConnectionFragment() }
         //profile picture change
-        profile_pic.setOnClickListener {
-            takePicture()
-        }
+        profile_pic.setOnClickListener { takePicture() }
 
         return view
     }
@@ -126,14 +114,14 @@ class ProfileFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getBmi() {
-        val weight = prefMan?.getString(getString(R.string.pref_user_weight), "0")
-        val height = prefMan?.getString(getString(R.string.pref_user_height), "0")
+        val weight = prefMan.getString(getString(R.string.pref_user_weight), "0")
+        val height = prefMan.getString(getString(R.string.pref_user_height), "0")
         val bmi: Float = (weight!!.toFloat() / ((height!!.toFloat() / 100) * (height.toFloat() / 100)))
 
-        greeting?.text = "Hello " + prefMan?.getString(getString(R.string.pref_user_name), "there") + "!"
-        weight_view?.text = "Weight: $weight"
-        height_view?.text = "Height: $height"
-        bmi_view?.text = "BMI: " + (bmi.toInt()).toString()
+        greeting.text = "Hello " + prefMan.getString(getString(R.string.pref_user_name), "there") + "!"
+        weight_view.text = "Weight: $weight"
+        height_view.text = "Height: $height"
+        bmi_view.text = "BMI: " + (bmi.toInt()).toString()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
