@@ -20,5 +20,8 @@
     <string name="pref_user_weight_title">Weight</string>
     <string name="pref_user_weight_sum">Set weight</string>
     <string name="pref_user_weight_hint">Set weight (kg)</string>
+    <string name="photo_pref">photopath</string>
+    <string name="photo_pref_title">Profile Picture Path</string>
+    <string name="photo_pref_sum">Profile picture path</string>
     <string name="saved_first_steps" />
 </resources>
