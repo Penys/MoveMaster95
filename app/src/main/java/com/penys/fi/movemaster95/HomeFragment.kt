@@ -54,6 +54,11 @@ class HomeFragment : Fragment(), SensorEventListener {
                 Toast.makeText(context, "You don't have enough steps for playing this game!!", Toast.LENGTH_SHORT).show()
             }
         }
+        
+        progressBarSecondary.setOnLongClickListener{
+            arCoreActivity()
+            true
+        }
 
     }
 
