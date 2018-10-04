@@ -12,11 +12,14 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toast
+import kotlinx.android.synthetic.main.bluetooth_layout.*
 import kotlinx.android.synthetic.main.home_layout.*
 
 
@@ -45,6 +48,16 @@ class HomeFragment : Fragment(), SensorEventListener {
             sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_UI)
         }
 
+        step_count.setOnClickListener {
+            val st = step_count.text.toString()
+            val sIntent = Intent()
+            sIntent.action = Intent.ACTION_SEND
+            sIntent.type = "text/plain"
+            sIntent.putExtra(Intent.EXTRA_TEXT, st)
+            sIntent.putExtra(Intent.EXTRA_SUBJECT, "Look how much have I walked today!")
+            startActivity(Intent.createChooser(sIntent, "Share steps via"))
+        }
+
         progressBar()
 
         progressBarSecondary.setOnClickListener {
@@ -54,7 +67,7 @@ class HomeFragment : Fragment(), SensorEventListener {
                 Toast.makeText(context, "You don't have enough steps for playing this game!!", Toast.LENGTH_SHORT).show()
             }
         }
-        
+
         progressBarSecondary.setOnLongClickListener{
             arCoreActivity()
             true
@@ -98,17 +111,13 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     @SuppressLint("SetTextI18n", "CommitPrefEdits")
     override fun onSensorChanged(event: SensorEvent?) {
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putInt(getString(R.string.saved_first_steps), event!!.values[0].toInt())
-            commit()
+        val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
+        with(prefMan.edit()) {
+            putInt(getString(R.string.step_count), event!!.values[0].toInt())
+            apply()
         }
-
-        Log.d("dbg", event?.values!![0].toString())
         if (running) {
-
-            step_count.text = event.values[0].toString()
+            step_count.text = event!!.values[0].toString()
             secondaryProgressStatus  = event.values[0].toInt()
 
         }
