@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ListView
@@ -12,8 +12,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:textAlignment="center"
-         />
+        android:textAlignment="center" />
 
     <Button
         android:id="@+id/sininappi"
@@ -23,7 +22,6 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:elevation="8dp"
-        android:text="Eti sinihammas"
-        />
+        android:text="Eti sinihammas" />
 
 </android.support.constraint.ConstraintLayout>

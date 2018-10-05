@@ -49,16 +49,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         mMap = googleMap
 
         mMap.uiSettings.isZoomControlsEnabled = true
-        mMap.getUiSettings().setZoomControlsEnabled(true)
+        mMap.uiSettings.isZoomControlsEnabled = true
         mMap.setOnMarkerClickListener(this)
         
 
         setUpMap()
     }
 
-    override fun onMarkerClick(p0: Marker?): Boolean {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun onMarkerClick(p0: Marker?) = false
 
     private fun setUpMap() {
         if (ActivityCompat.checkSelfPermission(this,

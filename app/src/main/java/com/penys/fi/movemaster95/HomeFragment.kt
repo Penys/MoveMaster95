@@ -13,13 +13,10 @@ import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.preference.PreferenceManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toast
-import kotlinx.android.synthetic.main.bluetooth_layout.*
 import kotlinx.android.synthetic.main.home_layout.*
 
 
@@ -81,7 +78,6 @@ class HomeFragment : Fragment(), SensorEventListener {
         handler = Handler(Handler.Callback {
             if (isStarted) {
 
-
                 handler?.sendEmptyMessageDelayed(0, 100)
             }
             true
@@ -93,7 +89,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
             secondaryHandler?.post {
                 val secProgStat = secondaryProgressStatus / 100
-                progressBarSecondary.setSecondaryProgress(secProgStat)
+                progressBarSecondary.secondaryProgress = secProgStat
                 progress_text.text = "Daily Goal progress:\n $secondaryProgressStatus of 10 000"
 
             }
@@ -114,8 +110,10 @@ class HomeFragment : Fragment(), SensorEventListener {
         val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
         with(prefMan.edit()) {
             putInt(getString(R.string.step_count), event!!.values[0].toInt())
+            putString(getString(R.string.step_count_summary), event.values[0].toString())
             apply()
         }
+
         if (running) {
             step_count.text = event!!.values[0].toString()
             secondaryProgressStatus  = event.values[0].toInt()
