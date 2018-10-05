@@ -78,6 +78,7 @@ class ProfileFragment : Fragment() {
                         photoFile
                 )
                 myIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
+                myIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true);
                 startActivityForResult(myIntent, REQUEST_IMAGE_CAPTURE)
                 val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
                 with(prefMan.edit()){
