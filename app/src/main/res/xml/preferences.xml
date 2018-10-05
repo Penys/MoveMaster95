@@ -21,4 +21,14 @@
         android:hint="@string/pref_user_weight_hint"
         android:maxLength="5"
         android:inputType="number" />
+    <Preference
+        android:key="@string/photo_pref"
+        android:title="@string/photo_pref_title"
+        android:summary="@string/photo_pref_sum"
+        android:inputType="text" />
+    <Preference
+        android:key="@string/step_count"
+        android:title="@string/step_count_title"
+        android:summary="@string/step_count_summary"
+        android:inputType="text" />
 </PreferenceScreen>

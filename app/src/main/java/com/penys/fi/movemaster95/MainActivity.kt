@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    val manager = this!!.fragmentManager
+    private val manager = this.fragmentManager
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
@@ -75,7 +75,7 @@ class MainActivity : AppCompatActivity() {
                 .commit()
     }
 
-    fun mapsActivity() {
+    private fun mapsActivity() {
         val intent = Intent(this, MapsActivity::class.java).apply {
         }
         startActivity(intent)

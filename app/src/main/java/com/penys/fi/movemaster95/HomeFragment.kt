@@ -15,6 +15,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.util.Log
+import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,6 +76,16 @@ class HomeFragment : Fragment(), SensorEventListener {
             sensorManager?.registerListener(this, stepsSensor, SensorManager.SENSOR_DELAY_UI)
         }
 
+        step_count.setOnClickListener {
+            val st = step_count.text.toString()
+            val sIntent = Intent()
+            sIntent.action = Intent.ACTION_SEND
+            sIntent.type = "text/plain"
+            sIntent.putExtra(Intent.EXTRA_TEXT, st + " steps")
+            sIntent.putExtra(Intent.EXTRA_SUBJECT, "Look how much have I walked today?!")
+            startActivity(Intent.createChooser(sIntent, "Share steps via"))
+        }
+
         progressBar()
 
         progressBarSecondary.setOnClickListener {
@@ -86,15 +97,17 @@ class HomeFragment : Fragment(), SensorEventListener {
             }
 
         }
+        progressBarSecondary.setOnLongClickListener{
+            arCoreActivity()
+            true
+        }
     }
-
 
     @SuppressLint("SetTextI18n")
     fun progressBar() {
 
         handler = Handler(Handler.Callback {
             if (isStarted) {
-
 
                 handler?.sendEmptyMessageDelayed(0, 100)
             }
@@ -107,7 +120,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
             secondaryHandler?.post {
                 val secProgStat = secondaryProgressStatus / 100
-                progressBarSecondary.setSecondaryProgress(secProgStat)
+                progressBarSecondary.secondaryProgress = secProgStat
                 progress_text.text = "Daily Goal progress:\n $secondaryProgressStatus of 10 000"
 
             }
@@ -126,14 +139,13 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     @SuppressLint("SetTextI18n", "CommitPrefEdits")
     override fun onSensorChanged(event: SensorEvent?) {
-
-        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
-        with(sharedPref.edit()) {
-            putInt(getString(R.string.saved_first_steps), event!!.values[0].toInt())
-            commit()
+        val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
+        with(prefMan.edit()) {
+            putInt(getString(R.string.step_count), event!!.values[0].toInt())
+            putString(getString(R.string.step_count_summary), event.values[0].toString())
+            apply()
         }
 
-        Log.d("dbg", event?.values!![0].toString())
         if (running) {
 
             step_count.text = event.values[0].toString()
