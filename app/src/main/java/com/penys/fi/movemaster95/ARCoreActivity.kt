@@ -18,11 +18,11 @@ import java.util.concurrent.CompletableFuture
 
 class ARCoreActivity : AppCompatActivity() {
 
-    lateinit var testRenderable: ModelRenderable
-    lateinit var fragment: ArFragment
-    lateinit var renderableFuture: CompletableFuture<ModelRenderable>
-    lateinit var modelUri: Uri
-    lateinit var duckSound: MediaPlayer
+    private lateinit var testRenderable: ModelRenderable
+    private lateinit var fragment: ArFragment
+    private lateinit var renderableFuture: CompletableFuture<ModelRenderable>
+    private lateinit var modelUri: Uri
+    private lateinit var duckSound: MediaPlayer
 
     private var blastCount = 0
     private var nro: Int = 0
@@ -38,7 +38,7 @@ class ARCoreActivity : AppCompatActivity() {
         fragment = supportFragmentManager.findFragmentById(R.id.sceneform_fragment) as ArFragment
 
         blast_counter.text = getString(R.string.duck_meter) + "$blastCount"
-        modelUri = Uri.parse("RubberDuck.sfb")
+        this.modelUri = Uri.parse("RubberDuck.sfb")
         duckSound = MediaPlayer.create(this, R.raw.duck)
         renderableFuture = ModelRenderable.builder()
                 .setSource(this, modelUri).build()

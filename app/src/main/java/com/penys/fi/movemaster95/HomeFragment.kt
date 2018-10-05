@@ -50,7 +50,7 @@ class HomeFragment : Fragment(), SensorEventListener {
             val sIntent = Intent()
             sIntent.action = Intent.ACTION_SEND
             sIntent.type = "text/plain"
-            sIntent.putExtra(Intent.EXTRA_TEXT, st + " steps")
+            sIntent.putExtra(Intent.EXTRA_TEXT, "$st steps")
             sIntent.putExtra(Intent.EXTRA_SUBJECT, "Look how much have I walked today?!")
             startActivity(Intent.createChooser(sIntent, "Share steps via"))
         }

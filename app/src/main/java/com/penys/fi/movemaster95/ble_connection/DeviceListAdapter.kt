@@ -1,5 +1,6 @@
 package com.penys.fi.movemaster95.ble_connection
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -13,17 +14,18 @@ class DeviceListAdapter(context: Context, private val devices: List<BluetoothDev
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
+    @SuppressLint("ViewHolder")
     override fun getView(position: Int, p1: View?, p2: ViewGroup?): View {
         val rowView = inflater.inflate(R.layout.bluetooth_devices, p2, false)
         val thisBleDev = devices[position]
 
-        var tv = rowView.findViewById(R.id.device_name_field) as TextView
+        val tv = rowView.findViewById(R.id.device_name_field) as TextView
         tv.text = thisBleDev.name
 
-        var tv2 = rowView.findViewById(R.id.device_address_field) as TextView
+        val tv2 = rowView.findViewById(R.id.device_address_field) as TextView
         tv2.text = thisBleDev.deviceAddress
 
-        var tv3 = rowView.findViewById(R.id.device_db_field) as TextView
+        val tv3 = rowView.findViewById(R.id.device_db_field) as TextView
         tv3.text = thisBleDev.deviceDesibels.toString()
 
         return rowView
