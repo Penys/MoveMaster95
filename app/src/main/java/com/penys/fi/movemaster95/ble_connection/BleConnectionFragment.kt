@@ -5,7 +5,6 @@ package com.penys.fi.movemaster95.ble_connection
 import android.Manifest
 import android.app.Fragment
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothGatt
 import android.bluetooth.BluetoothManager
 import android.bluetooth.le.*
@@ -16,14 +15,11 @@ import android.os.Bundle
 import android.os.Handler
 import android.support.annotation.RequiresApi
 import android.support.v4.app.ActivityCompat
-import android.support.v4.content.ContextCompat.checkSelfPermission
-import android.support.v4.content.ContextCompat.getSystemService
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
 import com.penys.fi.movemaster95.R
 import kotlinx.android.synthetic.main.bluetooth_layout.*
 import java.util.*
@@ -52,24 +48,23 @@ class BleConnectionFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        sininappi.setOnClickListener {
+        scan_devices.setOnClickListener {
             DeviceList.devicesList.clear()
             startScan()
         }
 
-        listView.setOnItemClickListener { _, _, position, _ ->
+        list_view.setOnItemClickListener { _, _, position, _ ->
 
             Log.d("USR", "Selected $position")
-            val selectedBluetooth = listView.getItemAtPosition(position) as BluetoothDevs
+            val selectedBluetooth = list_view.getItemAtPosition(position) as BluetoothDevs
             Log.d("DEBUGGER", "Device: $selectedBluetooth")
 
             val gattClientCallback = GattClientCallback()
             mBluetoothGatt = selectedBluetooth.device.connectGatt(context, false, gattClientCallback)
-
         }
     }
+
     companion object {
-        val uuiidee = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
         const val SCAN_PERIOD: Long = 3000
     }
 
@@ -97,7 +92,7 @@ class BleConnectionFragment : Fragment() {
         mBluetoothLeScanner!!.stopScan(mScanCallback)
         mScanning = false
 
-        listView.adapter = DeviceListAdapter(
+        list_view.adapter = DeviceListAdapter(
                 context,
                 DeviceList.devicesList)
     }
@@ -157,4 +152,4 @@ class BleConnectionFragment : Fragment() {
         val devicesList: kotlin.collections.MutableList<BluetoothDevs> = java.util.ArrayList()
     }
 
-  }
+}

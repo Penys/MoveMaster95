@@ -103,6 +103,7 @@ class ProfileFragment : Fragment() {
         return image
     }
 
+
     private fun bleConnectionFragment() {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BleConnectionFragment())

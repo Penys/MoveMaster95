@@ -10,8 +10,11 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.support.annotation.RequiresApi
+import android.util.Log
 import android.preference.PreferenceManager
 import android.view.LayoutInflater
 import android.view.View
@@ -20,22 +23,50 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.home_layout.*
 
 
+@Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
 class HomeFragment : Fragment(), SensorEventListener {
+
     private var running = true
     private var sensorManager: SensorManager? = null
     private var isStarted = false
     private var handler: Handler? = null
     private var secondaryHandler: Handler? = Handler()
     private var secondaryProgressStatus = 0
+    //private val heartReceiver by lazy { makeBroadcastReceiver() }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.home_layout, container, false)
         sensorManager = activity!!.getSystemService(Context.SENSOR_SERVICE) as SensorManager
+
         return view
     }
 
+    /*private fun makeBroadcastReceiver(): BroadcastReceiver {
+        return object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+
+                Toast.makeText(context, "Broadcast Intent Detected.",
+                        Toast.LENGTH_LONG).show()
+
+                val bundle = intent.extras
+                var heartRate = ""
+                if (bundle != null) {
+                    heartRate = bundle.get("heartRate") as String
+                    Log.d("MITÄ", heartRate)
+
+                }
+            }
+        }
+    }*/
+
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onResume() {
         super.onResume()
+
+        // LocalBroadcastManager.getInstance(context)
+        //        .registerReceiver(heartReceiver, IntentFilter())
+
         running = true
         val stepsSensor = sensorManager?.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
@@ -58,18 +89,18 @@ class HomeFragment : Fragment(), SensorEventListener {
         progressBar()
 
         progressBarSecondary.setOnClickListener {
+
             if (secondaryProgressStatus >= 10000) {
                 arCoreActivity()
             } else {
                 Toast.makeText(context, "You don't have enough steps for playing this game!!", Toast.LENGTH_SHORT).show()
             }
-        }
 
+        }
         progressBarSecondary.setOnLongClickListener{
             arCoreActivity()
             true
         }
-
     }
 
     @SuppressLint("SetTextI18n")
@@ -100,6 +131,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         super.onPause()
         running = false
         sensorManager?.unregisterListener(this)
+
     }
 
     override fun onAccuracyChanged(p0: Sensor?, p1: Int) {
@@ -115,8 +147,9 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
         if (running) {
-            step_count.text = event!!.values[0].toInt().toString()
-            secondaryProgressStatus  = event.values[0].toInt()
+
+            step_count.text = event.values[0].toString()
+            secondaryProgressStatus = event.values[0].toInt()
 
         }
     }
