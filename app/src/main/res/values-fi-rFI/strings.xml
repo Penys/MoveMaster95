@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoveMaster95</string>
+    <string name="title_home">Koti</string>
+    <string name="title_map">Kartta</string>
+    <string name="title_profile">Profiili</string>
+    <string name="steps_counted">Lasketut askeleet:</string>
+    <string name="title_activity_maps">Kartta</string>
+    <string name="settings">Asetukset</string>
+    <string name="profile_page_greeting_placeholder">Terve!</string>
+    <string name="pref_user_name_title">Nimi</string>
+    <string name="pref_user_name_username_sum">Vaihda nimi</string>
+    <string name="pref_user_name_username_hint">Nimesi</string>
+    <string name="pref_user_height_title">Pituus</string>
+    <string name="pref_user_height_sum">Aseta pituus</string>
+    <string name="pref_user_height_hint">Aseta pituus (cm)</string>
+    <string name="pref_user_weight_title">Paino</string>
+    <string name="pref_user_weight_sum">Aseta paino</string>
+    <string name="pref_user_weight_hint">Aseta paino (cm)</string>
+    <string name="photo_pref_title">Profiilikuva</string>
+    <string name="step_count_title">Kaikki askeleet</string>
+    <string name="duck_meter">Ankkoja  liiskattu:</string>
+</resources>
