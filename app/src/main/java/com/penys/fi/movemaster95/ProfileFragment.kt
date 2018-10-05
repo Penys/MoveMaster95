@@ -5,10 +5,8 @@ package com.penys.fi.movemaster95
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Fragment
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -17,7 +15,6 @@ import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.content.FileProvider
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,12 +29,12 @@ class ProfileFragment : Fragment() {
 
     lateinit var prefMan: SharedPreferences
     lateinit var greeting: TextView
-    lateinit var weight_view: TextView
-    lateinit var height_view: TextView
-    lateinit var bmi_view: TextView
-    lateinit var profile_pic: ImageView
+    lateinit var weightView: TextView
+    lateinit var heightView: TextView
+    lateinit var bmiView: TextView
+    lateinit var profilePic: ImageView
     val REQUEST_IMAGE_CAPTURE = 1
-    private var photopath: String? = ""
+    private var photoPath: String? = ""
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -46,22 +43,22 @@ class ProfileFragment : Fragment() {
 
         //views init
         greeting = view.findViewById(R.id.greeting_text)
-        weight_view = view.findViewById(R.id.weight_view)
-        height_view = view.findViewById(R.id.height_view)
-        bmi_view = view.findViewById(R.id.bmi_view)
-        profile_pic = view.findViewById(R.id.profile_pic_view)
+        weightView = view.findViewById(R.id.weight_view)
+        heightView = view.findViewById(R.id.height_view)
+        bmiView = view.findViewById(R.id.bmi_view)
+        profilePic = view.findViewById(R.id.profile_pic_view)
 
         //prefs init
         prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
-        photopath = prefMan.getString(getString(R.string.photo_pref),"")
-        profile_pic.setImageURI(Uri.parse(photopath))
+        photoPath = prefMan.getString(getString(R.string.photo_pref),"")
+        profilePic.setImageURI(Uri.parse(photoPath))
 
         //calculate bmi
         getBmi()
         //bluetooth connection button
         heartRateButton.setOnClickListener { bleConnectionFragment() }
         //profile picture change
-        profile_pic.setOnClickListener { takePicture() }
+        profilePic.setOnClickListener { takePicture() }
 
         return view
     }
@@ -85,6 +82,7 @@ class ProfileFragment : Fragment() {
                 val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
                 with(prefMan.edit()){
                     putString(getString(R.string.photo_pref), photoFile.toString())
+                    putString(getString(R.string.photo_pref_sum), photoFile.toString())
                     apply()
                 }
             }
@@ -99,7 +97,7 @@ class ProfileFragment : Fragment() {
                 ".jpg",
                 storageDir
         )
-        photopath = image!!.absolutePath
+        photoPath = image!!.absolutePath
 
         return image
     }
@@ -119,15 +117,15 @@ class ProfileFragment : Fragment() {
         val bmi: Float = (weight!!.toFloat() / ((height!!.toFloat() / 100) * (height.toFloat() / 100)))
 
         greeting.text = "Hello " + prefMan.getString(getString(R.string.pref_user_name), "there") + "!"
-        weight_view.text = "Weight: $weight"
-        height_view.text = "Height: $height"
-        bmi_view.text = "BMI: " + (bmi.toInt()).toString()
+        weightView.text = "Weight: $weight"
+        heightView.text = "Height: $height"
+        bmiView.text = "BMI: " + (bmi.toInt()).toString()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val profile_pic = view?.findViewById<ImageView>(R.id.profile_pic_view)
+        val profilePic = view?.findViewById<ImageView>(R.id.profile_pic_view)
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            profile_pic?.setImageURI(Uri.parse(photopath))
+            profilePic?.setImageURI(Uri.parse(photoPath))
         }
     }
 }

@@ -22,9 +22,10 @@
     <string name="pref_user_weight_hint">Set weight (kg)</string>
     <string name="photo_pref">photopath</string>
     <string name="photo_pref_title">Profile Picture Path</string>
-    <string name="photo_pref_sum">Profile picture path</string>
-    <string name="saved_first_steps" />
+    <string name="photo_pref_sum" />
+
     <string name="step_count">step_count</string>
-    <string name="step_count_title">step_count_title</string>
-    <string name="step_count_summary">step_count_summary</string>
+    <string name="step_count_title">Total steps</string>
+    <string name="step_count_summary" />
+    <string name="duck_meter">Ducks blasted:</string>
 </resources>

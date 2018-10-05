@@ -18,8 +18,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.hardware.camera.ar" android:required="true" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.hardware.camera.ar"
+        android:required="true" />
 
 
     <application
@@ -31,7 +33,9 @@
         android:theme="@style/AppTheme"
         android:fullBackupContent="@xml/backup_descriptor"
         tools:ignore="GoogleAppIndexingWarning">
-        <meta-data android:name="com.google.ar.core" android:value="required" />
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAzVQ00dkAsWs94q-ykmxMa6k2_fJfZyeY" />
@@ -54,12 +58,12 @@
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.penys.fi.movemaster95"
             android:exported="false"
-            android:grantUriPermissions="true" >
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths" />
         </provider>
+
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
