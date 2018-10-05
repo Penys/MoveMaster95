@@ -63,6 +63,7 @@ class ProfileFragment : Fragment() {
         return view
     }
 
+
     private fun bleConnectionFragment() {
         fragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, BleConnectionFragment())

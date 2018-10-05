@@ -1,14 +1,12 @@
 package com.penys.fi.movemaster95.ble_connection
 
 import android.bluetooth.*
+import android.content.Context
 import android.util.Log
 import java.util.*
-import android.bluetooth.BluetoothGattDescriptor
-import android.bluetooth.BluetoothGattCharacteristic
-import android.bluetooth.BluetoothGatt
 
 
-class GattClientCallback : BluetoothGattCallback() {
+class GattClientCallback(var context: Context) : BluetoothGattCallback() {
 
     val uuiidee = UUID.fromString("00001101-0000-1000-8000-00805f9b34fb")
 
@@ -28,11 +26,11 @@ class GattClientCallback : BluetoothGattCallback() {
 
     override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
         super.onConnectionStateChange(gatt, status, newState)
-        if(status == BluetoothGatt.GATT_FAILURE) {
+        if (status == BluetoothGatt.GATT_FAILURE) {
             Log.d("DBG", "Gatt connection failure")
 
             return
-        }else if (status != BluetoothGatt.GATT_SUCCESS) {
+        } else if (status != BluetoothGatt.GATT_SUCCESS) {
             Log.d("DBG", "Gatt connection success")
 
             return
@@ -41,7 +39,7 @@ class GattClientCallback : BluetoothGattCallback() {
             Log.d("DBG", "Connected GATT service")
 
             gatt?.discoverServices()
-        }else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
+        } else if (newState == BluetoothProfile.STATE_DISCONNECTED) {
             Log.d("DBG", "Gatt state disconnect")
 
             return
@@ -59,10 +57,10 @@ class GattClientCallback : BluetoothGattCallback() {
         for (gattService in gatt!!.services) {
             Log.d("DBG", "Service ${gattService.uuid}")
 
-            if(gattService.uuid == HEART_RATE_SERVICE_UUID) {
+            if (gattService.uuid == HEART_RATE_SERVICE_UUID) {
                 Log.d("DBG", "BINGO!")
 
-                for(gattCharacteristic in gattService.characteristics)
+                for (gattCharacteristic in gattService.characteristics)
                     Log.d("DBG", "Characteristic ${gattCharacteristic.uuid}")
 
                 val characteristic = gatt.getService(HEART_RATE_SERVICE_UUID)
@@ -85,9 +83,19 @@ class GattClientCallback : BluetoothGattCallback() {
     override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
         Log.d("DBG", "Characteristic data received")
         Log.d("MITÄ TULEE ULOS", "${characteristic.value[1]}")
-        //exitProcess(characteristic)
+        //sendHeartRate("${characteristic.value[1]}")
 
     }
+
+    /*private fun sendHeartRate(heartRate: String) {
+
+        val intent = Intent()
+        intent.action = "rate"
+        intent.putExtra("heartRate", heartRate)
+        intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent)
+
+    }*/
 
     override fun onDescriptorWrite(gatt: BluetoothGatt, descriptor: BluetoothGattDescriptor, status: Int) {
         Log.d("DBG", "OnDescriptionWrite")
@@ -99,3 +107,4 @@ class GattClientCallback : BluetoothGattCallback() {
     }
 
 }
+
