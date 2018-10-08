@@ -58,7 +58,8 @@ class BleConnectionFragment : Fragment() {
             val selectedBluetooth = list_view.getItemAtPosition(position) as BluetoothDevs
             Log.d("DEBUGGER", "Device: $selectedBluetooth")
 
-            val gattClientCallback = GattClientCallback()
+
+            val gattClientCallback = GattClientCallback(context)
             mBluetoothGatt = selectedBluetooth.device.connectGatt(context, false, gattClientCallback)
         }
     }
