@@ -1,11 +1,13 @@
 package com.penys.fi.movemaster95.ble_connection
 
 import android.bluetooth.*
+import android.content.Context
+import android.content.Intent
 import android.util.Log
 import java.util.*
 
 
-class GattClientCallback : BluetoothGattCallback() {
+class GattClientCallback(val ctx: Context) : BluetoothGattCallback() {
 
     private val HEART_RATE_SERVICE_UUID = convertFromInteger(0x180D)
     private val HEART_RATE_MEASUREMENT_CHAR_UUID = convertFromInteger(0x2A37)
@@ -22,6 +24,10 @@ class GattClientCallback : BluetoothGattCallback() {
 
     override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
         super.onConnectionStateChange(gatt, status, newState)
+        val intent = Intent("heart_rate")
+        intent.putExtra("heart_rate", "tuliskohan pihalle saatana")
+        // LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent)
+
         if (status == BluetoothGatt.GATT_FAILURE) {
             Log.d("DBG", "Gatt connection failure")
 
@@ -78,8 +84,11 @@ class GattClientCallback : BluetoothGattCallback() {
 
     override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
         Log.d("DBG", "Characteristic data received")
-        Log.d("MITÄ TULEE ULOS", "${characteristic.value[1]}")
-        //exitProcess(characteristic)
+        Log.d("MITÄ TULEE ULOS", "${characteristic.value[0]}")
+        /*val intent = Intent("heart_rate")
+        intent.putExtra("heart_rate","${characteristic.value[1]}")
+        LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent)*/
+
 
     }
 

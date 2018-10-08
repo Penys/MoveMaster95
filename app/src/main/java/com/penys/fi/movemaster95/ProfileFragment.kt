@@ -5,8 +5,7 @@ package com.penys.fi.movemaster95
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Fragment
-import android.content.Intent
-import android.content.SharedPreferences
+import android.content.*
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -15,15 +14,17 @@ import android.preference.PreferenceManager
 import android.provider.MediaStore
 import android.support.annotation.RequiresApi
 import android.support.v4.content.FileProvider
+import android.support.v4.content.LocalBroadcastManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import com.penys.fi.movemaster95.ble_connection.BleConnectionFragment
 import java.io.File
 import java.io.IOException
-import com.penys.fi.movemaster95.ble_connection.BleConnectionFragment
 
 class ProfileFragment : Fragment() {
 
@@ -50,7 +51,7 @@ class ProfileFragment : Fragment() {
 
         //prefs init
         prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
-        photoPath = prefMan.getString(getString(R.string.photo_pref),"")
+        photoPath = prefMan.getString(getString(R.string.photo_pref), "")
         profilePic.setImageURI(Uri.parse(photoPath))
 
         //calculate bmi
@@ -60,8 +61,16 @@ class ProfileFragment : Fragment() {
         //profile picture change
         profilePic.setOnClickListener { takePicture() }
 
+        val extras: Bundle?
+
+        extras = activity.intent.extras
+        if(extras != null) {
+            val heartRate = extras.getString("heart_rate") as String
+            Log.d("MITÄ", heartRate)
+        }
         return view
     }
+
 
     private fun takePicture() {
         val myIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -70,18 +79,19 @@ class ProfileFragment : Fragment() {
             var photoFile: File? = null
             try {
                 photoFile = createImageFile()
-            }catch (e: IOException){}
-            if(photoFile != null){
+            } catch (e: IOException) {
+            }
+            if (photoFile != null) {
                 val photoUri = FileProvider.getUriForFile(
                         activity,
                         "com.penys.fi.movemaster95",
                         photoFile
                 )
-                myIntent.putExtra(MediaStore.EXTRA_OUTPUT,photoUri)
+                myIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri)
                 myIntent.putExtra("android.intent.extra.USE_FRONT_CAMERA", true)
                 startActivityForResult(myIntent, REQUEST_IMAGE_CAPTURE)
                 val prefMan = PreferenceManager.getDefaultSharedPreferences(activity)
-                with(prefMan.edit()){
+                with(prefMan.edit()) {
                     putString(getString(R.string.photo_pref), photoFile.toString())
                     putString(getString(R.string.photo_pref_sum), photoFile.toString())
                     apply()
@@ -125,7 +135,7 @@ class ProfileFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         val profilePic = view?.findViewById<ImageView>(R.id.profile_pic_view)
-        if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
             profilePic?.setImageURI(Uri.parse(photoPath))
         }
     }

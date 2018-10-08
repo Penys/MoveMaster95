@@ -14,6 +14,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import java.util.concurrent.ThreadLocalRandom
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -36,22 +37,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.setOnMarkerClickListener(this)
-        
 
         setUpMap()
     }
@@ -66,25 +57,33 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
             return
         }
-        // 1
         mMap.isMyLocationEnabled = true
 
-// 2
         fusedLocationClient.lastLocation.addOnSuccessListener(this) { location ->
-            // Got last known location. In some rare situations this can be null.
-            // 3
+
             if (location != null) {
                 lastLocation = location
-
-                val numb = 0.04504504504
-                val rnd = LatLng(location.latitude + numb,location.longitude + numb )
-                mMap.addMarker(MarkerOptions().position(rnd).title("mee tänne"))
-
+                //set your current location
                 val currentLatLng = LatLng(location.latitude, location.longitude)
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 12f))
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 11f))
+
+                addRandomLocations(lastLocation)
             }
         }
 
+    }
+
+    private fun addRandomLocations(location: Location) {
+
+        val latDistance = 0.04504504504
+        val longDistance = 0.09
+
+        for (i in 0..4) {
+            val randomDoubleLat = ThreadLocalRandom.current().nextDouble(-latDistance, latDistance)
+            val randomDoubleLon = ThreadLocalRandom.current().nextDouble(-longDistance, longDistance)
+            val randomLocation = LatLng(location.latitude + randomDoubleLat, location.longitude + randomDoubleLon)
+            mMap.addMarker(MarkerOptions().position(randomLocation).title("Go to increase your daily steps."))
+        }
     }
 }
 
