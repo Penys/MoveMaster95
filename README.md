@@ -27,7 +27,7 @@ We wanna tip our Fedora for:
 * Erkki Halinen [@ErkHal](https://github.com/ErkHal)  
 * Sompasauna provided recreation activities  
 ## Contributors
-@anttinym  
+[@anttinym](https://github.com/anttinym)  
 ![anttinym](https://avatars0.githubusercontent.com/u/33100455?s=460&v=4)  
-@pessi22  
+[@pessi22](https://github.com/pessi22)  
 ![pessi22](https://avatars2.githubusercontent.com/u/33121987?s=460&v=4)  
