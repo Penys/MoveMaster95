@@ -3,6 +3,7 @@ package com.penys.fi.movemaster95.ble_connection
 import android.bluetooth.*
 import android.content.Context
 import android.content.Intent
+import android.support.v4.content.LocalBroadcastManager
 import android.util.Log
 import java.util.*
 
@@ -24,9 +25,6 @@ class GattClientCallback(val ctx: Context) : BluetoothGattCallback() {
 
     override fun onConnectionStateChange(gatt: BluetoothGatt?, status: Int, newState: Int) {
         super.onConnectionStateChange(gatt, status, newState)
-        val intent = Intent("heart_rate")
-        intent.putExtra("heart_rate", "tuliskohan pihalle saatana")
-        // LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent)
 
         if (status == BluetoothGatt.GATT_FAILURE) {
             Log.d("DBG", "Gatt connection failure")
@@ -85,9 +83,9 @@ class GattClientCallback(val ctx: Context) : BluetoothGattCallback() {
     override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
         Log.d("DBG", "Characteristic data received")
         Log.d("MITÄ TULEE ULOS", "${characteristic.value[0]}")
-        /*val intent = Intent("heart_rate")
+        val intent = Intent("heart_rate")
         intent.putExtra("heart_rate","${characteristic.value[1]}")
-        LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent)*/
+        LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent)
 
 
     }

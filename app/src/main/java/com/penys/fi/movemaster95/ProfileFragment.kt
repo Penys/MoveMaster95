@@ -61,13 +61,13 @@ class ProfileFragment : Fragment() {
         //profile picture change
         profilePic.setOnClickListener { takePicture() }
 
-        val extras: Bundle?
+       /* val extras: Bundle?
 
         extras = activity.intent.extras
         if(extras != null) {
             val heartRate = extras.getString("heart_rate") as String
             Log.d("MITÄ", heartRate)
-        }
+        }*/
         return view
     }
 
