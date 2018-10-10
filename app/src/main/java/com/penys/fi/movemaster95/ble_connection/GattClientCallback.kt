@@ -82,11 +82,7 @@ class GattClientCallback(val ctx: Context) : BluetoothGattCallback() {
 
     override fun onCharacteristicChanged(gatt: BluetoothGatt, characteristic: BluetoothGattCharacteristic) {
         Log.d("DBG", "Characteristic data received")
-        Log.d("MITÄ TULEE ULOS", "${characteristic.value[0]}")
-        val intent = Intent("heart_rate")
-        intent.putExtra("heart_rate","${characteristic.value[1]}")
-        LocalBroadcastManager.getInstance(ctx).sendBroadcast(intent)
-
+        Log.d("output", "${characteristic.value[0]}")
 
     }
 

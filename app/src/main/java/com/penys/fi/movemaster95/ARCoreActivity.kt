@@ -32,9 +32,6 @@ class ARCoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_arcore)
 
-
-
-
         fragment = supportFragmentManager.findFragmentById(R.id.sceneform_fragment) as ArFragment
 
         blast_counter.text = getString(R.string.duck_meter) + "$blastCount"

@@ -26,7 +26,6 @@ import java.util.*
 
 class BleConnectionFragment : Fragment() {
 
-
     private var mBluetoothLeScanner: BluetoothLeScanner? = null
     private var mBluetoothAdapter: BluetoothAdapter? = null
     private var mScanCallback: ScanCallback? = null
@@ -56,20 +55,21 @@ class BleConnectionFragment : Fragment() {
             startScan()
         }
 
-        list_view.setOnItemClickListener { _, _, position, _ ->
 
+        list_view.setOnItemClickListener { _, _, position, _ ->
+            //take clicked element from listview
             Log.d("USR", "Selected $position")
             val selectedBluetooth = list_view.getItemAtPosition(position) as BluetoothDevs
             Log.d("DEBUGGER", "Device: $selectedBluetooth")
 
-
+            //start connecting to clicked element via GattClient
             val gattClientCallback = GattClientCallback(context)
             mBluetoothGatt = selectedBluetooth.device.connectGatt(context, false, gattClientCallback)
         }
     }
 
     private fun showProgressBar() {
-
+        //progressBar thread
         Thread(Runnable {
             activity.runOnUiThread { progressBar.visibility = View.VISIBLE }
     }).start()
@@ -81,6 +81,7 @@ companion object {
 
 private fun startScan() {
     Log.d("DBG", "Scan start")
+    //start scanning bluetooth devices
     mScanResults = HashMap()
     mScanCallback = BtleScanCallback()
     mBluetoothLeScanner = mBluetoothAdapter!!.bluetoothLeScanner
@@ -101,10 +102,12 @@ private fun startScan() {
 }
 
 private fun stopScan() {
+    //stop scanning
     mBluetoothLeScanner!!.stopScan(mScanCallback)
     mScanning = false
+    //hide progressbar
     progressBar.visibility = View.GONE
-
+    //Listing devices
     list_view.adapter = DeviceListAdapter(
             context,
             DeviceList.devicesList)
@@ -112,6 +115,7 @@ private fun stopScan() {
 
 @RequiresApi(Build.VERSION_CODES.M)
 private fun hasPermissions(): Boolean {
+    //checks permissions of fine location
     if (mBluetoothAdapter == null || !mBluetoothAdapter!!.isEnabled) {
         Log.d("BUG", "No Bluetooth LE capability")
         return false
@@ -143,13 +147,14 @@ private inner class BtleScanCallback : ScanCallback() {
 
 
     private fun addScanResult(result: ScanResult) {
-
+        //get results from the object
         val device = result.device
         val deviceAddress = device.address
         val deviceName = device.name
         val deviceDesibels = result.rssi
 
         if (deviceName != null) {
+            //make devicelist object
             DeviceList.devicesList.add(BluetoothDevs(device, deviceName, deviceAddress, deviceDesibels))
         } else {
             return
