@@ -18,6 +18,7 @@ To get started with MoveMaster95 you need an Android phone (with Android 7.0 or 
 ## Prerequisites
 * Android phone (with Android 7.0 or higher)  
 * Android Studio  
+* Git  
 * Heart Rate Sensor(optional)  
 ## Installing
 1. Install Android Studio  
@@ -31,8 +32,9 @@ To get started with MoveMaster95 you need an Android phone (with Android 7.0 or 
 5. Start app  
 * Now you can start using MoveMaster95 application.  
 ## Built With
-* Android Studio
-* WhatsApp - for messaging
+* Android Studio  
+* Git for version control  
+* WhatsApp - for messaging  
 ## License
 This project is licensed under the Open Source License.  
 ## Acknowledgments
