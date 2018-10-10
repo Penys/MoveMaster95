@@ -12,6 +12,7 @@ MoveMaster95 is a fitness tracking & motivation application that uses multiple p
 * AR minigame (MegaBlaster300)  
 * Heart rate sensor via Bluetooth  
 * Camera and photo saving  
+* Share step count to friends  
 ## Getting Started
 To get started with MoveMaster95 you need an Android phone (with Android 7.0 or higher), Android Studio installed on your computer and optionally a heart rate sensor.  
 ## Prerequisites
