@@ -4,28 +4,28 @@ MoveMaster95 is a fitness tracking & motivation application that uses multiple p
 ## Getting Started
 To get started with MoveMaster95 you need an Android phone (with Android 7.0 or higher), Android Studio installed on your computer and optionally a heart rate sensor.  
 ## Prerequisites
--Android phone  
--Android Studio  
--Heart Rate Sensor(optional)  
+- Android phone  
+- Android Studio  
+- Heart Rate Sensor(optional)  
 ## Installing
 1. Install Android Studio.  
-..* Android Studio is available on Android Studio for installing follow the instruction on this link.  
+* Android Studio is available on Android Studio for installing follow the instruction on this link.  
 2. Import project to Android Studio  
-..* You can directly import github projects into Android Studio. File -> New -> Project from Version Control -> GitHub. Then enter your github username and password.Select the repository and hit clone.  
-..* The github repo will be created as a new project in android studio. - Stackoverflow  
+* You can directly import github projects into Android Studio. File -> New -> Project from Version Control -> GitHub. Then enter your github username and password.Select the repository and hit clone.  
+* The github repo will be created as a new project in android studio. - Stackoverflow  
 3. Run MoveMaster95  
-..* Follow the instruction on this link to run the app on a real device or an emulator.  
+* Follow the instruction on this link to run the app on a real device or an emulator.  
 4. Start app  
-..* Now you can start using MoveMaster95 application.  
+* Now you can start using MoveMaster95 application.  
 ## Built With
-..* Android Studio
-..* WhatsApp - for messaging
+* Android Studio
+* WhatsApp - for messaging
 ## License
 This project is licensed under the Open Source License - see the Open Source file for details  
 ## Acknowledgments
 We wanna tip our Fedora for  
-..* ErkHal GitHub  
-..* Sompasauna provided recreation activities  
+* ErkHal GitHub  
+* Sompasauna provided recreation activities  
 ## Contributors
 @anttinym  
 ![anttinym](https://avatars0.githubusercontent.com/u/33100455?s=460&v=4)  
