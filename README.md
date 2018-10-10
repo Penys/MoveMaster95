@@ -20,14 +20,15 @@ To get started with MoveMaster95 you need an Android phone (with Android 7.0 or 
 * Android Studio  
 * Heart Rate Sensor(optional)  
 ## Installing
-1. Install Android Studio.  
-* Android Studio is available on Android Studio for installing follow the instruction on this link.  
-2. Import project to Android Studio  
-* You can directly import github projects into Android Studio. File -> New -> Project from Version Control -> GitHub. Then enter your github username and password.Select the repository and hit clone.  
-* The github repo will be created as a new project in android studio. - Stackoverflow  
-3. Run MoveMaster95  
-* Follow the instruction on this link to run the app on a real device or an emulator.  
-4. Start app  
+1. Install Android Studio  
+* Android Studio is available [here](https://developer.android.com/studio/) for installing follow the instructions in the link.  
+2. Clone the repo  
+`git clone https://github.com/Penys/MoveMaster95.git`  
+3. Open cloned project in Android Studio  
+* Start Android Studio and open the cloned project
+4. Build & run MoveMaster95  
+* Run the app on a real device or an emulator.  
+5. Start app  
 * Now you can start using MoveMaster95 application.  
 ## Built With
 * Android Studio
