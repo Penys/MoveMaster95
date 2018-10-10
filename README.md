@@ -1,3 +1,3 @@
 # MoveMaster95
 Fitness tracking &amp; motivation application
-![Mockup Image](launch/mockup_new.png)
+![Logo](readme_assets/MoveMaster95.png)
