@@ -6,6 +6,7 @@
     android:layout_height="match_parent">
 
     <ProgressBar
+        android:contentDescription="@string/progress_bar"
         android:id="@+id/progressBarSecondary"
         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
         android:layout_width="wrap_content"
@@ -45,8 +46,9 @@
 
     <TextView
         android:id="@+id/step_count"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:gravity="center"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
