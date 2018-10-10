@@ -68,7 +68,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
         progressBarSecondary.setOnLongClickListener{
-            //starting ARCoreActivity
+            //starting ARCoreActivity (cheat)
             arCoreActivity()
             true
         }

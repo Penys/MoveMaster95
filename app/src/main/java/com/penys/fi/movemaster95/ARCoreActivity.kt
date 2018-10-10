@@ -77,6 +77,7 @@ class ARCoreActivity : AppCompatActivity() {
                         Log.d("NUMERO", "$nro")
                     }
                     mNode.setOnTapListener { _, _ ->
+                        //delete object
                         duckSound.start()
                         blastCount++
                         blast_counter.text = "Ducks blasted: $blastCount"
