@@ -2,12 +2,22 @@
 # MoveMaster95
 MoveMaster95 is a fitness tracking & motivation application that uses multiple phone sensors to collect data of your fitness progress.  
 ![screens](readme_assets/MoveMaster95_screens.png)  
+## Features
+* Step counter  
+* Dark theme  
+* Accessibility checked  
+* App navigation through tabs and fragments  
+* Persistence through SharedPreferences  
+* Google Maps and GPS  
+* AR minigame (MegaBlaster300)  
+* Heart rate sensor via Bluetooth  
+* Camera and photo saving  
 ## Getting Started
 To get started with MoveMaster95 you need an Android phone (with Android 7.0 or higher), Android Studio installed on your computer and optionally a heart rate sensor.  
 ## Prerequisites
-- Android phone (with Android 7.0 or higher)  
-- Android Studio  
-- Heart Rate Sensor(optional)  
+* Android phone (with Android 7.0 or higher)  
+* Android Studio  
+* Heart Rate Sensor(optional)  
 ## Installing
 1. Install Android Studio.  
 * Android Studio is available on Android Studio for installing follow the instruction on this link.  
