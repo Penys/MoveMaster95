@@ -50,6 +50,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     override fun onMarkerClick(p0: Marker?) = false
 
     private fun setUpMap() {
+        //checks maps permission
         if (ActivityCompat.checkSelfPermission(this,
                         android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -63,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
 
             if (location != null) {
                 lastLocation = location
-                //set your current location
+                //set your current location and move to camera
                 val currentLatLng = LatLng(location.latitude, location.longitude)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLng, 11f))
 
@@ -74,7 +75,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarker
     }
 
     private fun addRandomLocations(location: Location) {
-
+        //add 5 random locations on map and add markers
         val latDistance = 0.04504504504
         val longDistance = 0.09
 

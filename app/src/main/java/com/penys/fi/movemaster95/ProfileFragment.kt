@@ -61,13 +61,6 @@ class ProfileFragment : Fragment() {
         //profile picture change
         profilePic.setOnClickListener { takePicture() }
 
-       /* val extras: Bundle?
-
-        extras = activity.intent.extras
-        if(extras != null) {
-            val heartRate = extras.getString("heart_rate") as String
-            Log.d("MITÄ", heartRate)
-        }*/
         return view
     }
 
@@ -127,6 +120,7 @@ class ProfileFragment : Fragment() {
         val height = prefMan.getString(getString(R.string.pref_user_height), "0")
         val bmi: Float = (weight!!.toFloat() / ((height!!.toFloat() / 100) * (height.toFloat() / 100)))
 
+        //set your info to profile page
         greeting.text = "Hello " + prefMan.getString(getString(R.string.pref_user_name), "there") + "!"
         weightView.text = "Weight: $weight"
         heightView.text = "Height: $height"

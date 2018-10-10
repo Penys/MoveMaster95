@@ -46,6 +46,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
         step_count.setOnClickListener {
+            //sharing your steps
             val st = step_count.text.toString()
             val sIntent = Intent()
             sIntent.action = Intent.ACTION_SEND
@@ -58,6 +59,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         progressBar()
 
         progressBarSecondary.setOnClickListener {
+            //starting ARCoreActivity if steps are over 10k
             if (secondaryProgressStatus >= 10000) {
                 arCoreActivity()
             } else {
@@ -66,6 +68,7 @@ class HomeFragment : Fragment(), SensorEventListener {
         }
 
         progressBarSecondary.setOnLongClickListener{
+            //starting ARCoreActivity (cheat)
             arCoreActivity()
             true
         }
@@ -74,7 +77,7 @@ class HomeFragment : Fragment(), SensorEventListener {
 
     @SuppressLint("SetTextI18n")
     fun progressBar() {
-
+        //StepProgressBarHandler
         handler = Handler(Handler.Callback {
             if (isStarted) {
 

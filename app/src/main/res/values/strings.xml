@@ -24,8 +24,8 @@
     <string name="photo_pref_title">Profile Picture Path</string>
     <string name="photo_pref_sum" translatable="false" />
     <string name="profile_picture">Profile Picture</string>
-
-    <string name="step_count">step_count</string>
+    <string name="progress_bar">Progress Bar</string>
+    <string name="step_count" translatable="false">step_count</string>
     <string name="step_count_title">Total steps</string>
     <string name="step_count_summary" translatable="false" />
     <string name="duck_meter">Ducks blasted:</string>
