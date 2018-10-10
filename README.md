@@ -1,4 +1,4 @@
-![Logo](readme_assets/MoveMaster95.png)  
+![Logo](readme_assets/MoveMaster95_logo.png)  
 # MoveMaster95
 MoveMaster95 is a fitness tracking & motivation application that uses multiple phone sensors to collect data of your fitness progress.  
 ## Getting Started
@@ -23,7 +23,7 @@ To get started with MoveMaster95 you need an Android phone (with Android 7.0 or 
 ## License
 This project is licensed under the Open Source License.  
 ## Acknowledgments
-We wanna tip our Fedora for:  
+We wanna tip our fedora for:  
 * Erkki Halinen [@ErkHal](https://github.com/ErkHal)  
 * Sompasauna provided recreation activities  
 ## Contributors
