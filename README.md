@@ -21,10 +21,10 @@ To get started with MoveMaster95 you need an Android phone (with Android 7.0 or 
 * Android Studio
 * WhatsApp - for messaging
 ## License
-This project is licensed under the Open Source License - see the Open Source file for details  
+This project is licensed under the Open Source License.  
 ## Acknowledgments
-We wanna tip our Fedora for  
-* ErkHal GitHub  
+We wanna tip our Fedora for:  
+* Erkki Halinen [@ErkHal](https://github.com/ErkHal)  
 * Sompasauna provided recreation activities  
 ## Contributors
 @anttinym  
